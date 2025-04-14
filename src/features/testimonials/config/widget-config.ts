@@ -1,0 +1,41 @@
+export interface WidgetConfig {
+  containerId: string;
+  testimonials: {
+    id: number;
+    thumbnail: string;
+    videoUrl: string;
+    name: string;
+    title: string;
+    company: string;
+  }[];
+}
+
+export const defaultConfig: WidgetConfig = {
+  containerId: 'ghl-testimonial-slider',
+  testimonials: [
+    {
+      id: 1,
+      thumbnail: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
+      videoUrl: "https://download.samplelib.com/mp4/sample-5s.mp4",
+      name: "Sarah Johnson",
+      title: "Chief Marketing Officer",
+      company: "TechVision Inc."
+    },
+    {
+      id: 2,
+      thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      videoUrl: "https://download.samplelib.com/mp4/sample-5s.mp4",
+      name: "Michael Chen",
+      title: "Founder & CEO",
+      company: "Innovation Labs"
+    },
+    {
+      id: 3,
+      thumbnail: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+      videoUrl: "https://download.samplelib.com/mp4/sample-5s.mp4",
+      name: "Emily Rodriguez",
+      title: "Product Director",
+      company: "Future Dynamics"
+    }
+  ]
+};

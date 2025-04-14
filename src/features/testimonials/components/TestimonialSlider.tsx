@@ -1,13 +1,15 @@
-
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { testimonials } from '../constants/testimonials';
 import { TestimonialCard } from './TestimonialCard';
 import { VideoPreviewModal } from './VideoPreviewModal';
-import type { Testimonial } from '../constants/testimonials';
+import type { Testimonial } from '../config/widget-config';
 
-export function TestimonialSlider() {
+interface TestimonialSliderProps {
+  testimonials: Testimonial[];
+}
+
+export function TestimonialSlider({ testimonials }: TestimonialSliderProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
