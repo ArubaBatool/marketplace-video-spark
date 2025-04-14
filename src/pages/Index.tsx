@@ -1,5 +1,5 @@
 
-import { TestimonialSlider } from "@/components/TestimonialSlider";
+import { TestimonialSlider } from "@/features/testimonials/components/TestimonialSlider";
 
 const Index = () => {
   return (
