@@ -1,7 +1,12 @@
 
-import React, { useCallback, useEffect, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { TestimonialCard } from './TestimonialCard';
 import type { Testimonial } from '../config/widget-config';
 
@@ -10,60 +15,26 @@ interface TestimonialSliderProps {
 }
 
 export function TestimonialSlider({ testimonials }: TestimonialSliderProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: true,
-    align: 'start',
-    slidesToScroll: 1
-  });
-  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
-  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
-
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setPrevBtnEnabled(emblaApi.canScrollPrev());
-    setNextBtnEnabled(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on('select', onSelect);
-    emblaApi.on('reInit', onSelect);
-  }, [emblaApi, onSelect]);
-
   return (
-    <div className="relative max-w-7xl mx-auto">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex -ml-6">
+    <div className="relative max-w-5xl mx-auto px-4">
+      <Carousel
+        opts={{
+          align: "center",
+          loop: true,
+        }}
+        className="w-full"
+      >
+        <CarouselContent>
           {testimonials.map((testimonial) => (
-            <div 
-              key={testimonial.id} 
-              className="flex-[0_0_100%] min-w-0 pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
-            >
+            <CarouselItem key={testimonial.id} className="md:basis-1/2 lg:basis-1/3">
               <TestimonialCard testimonial={testimonial} />
-            </div>
+            </CarouselItem>
           ))}
-        </div>
-      </div>
-      
-      <button
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-800 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed z-10"
-        onClick={scrollPrev}
-        disabled={!prevBtnEnabled}
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      
-      <button
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-800 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed z-10"
-        onClick={scrollNext}
-        disabled={!nextBtnEnabled}
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
+        </CarouselContent>
+        <CarouselPrevious className="hidden md:flex" />
+        <CarouselNext className="hidden md:flex" />
+      </Carousel>
     </div>
   );
 }
+
