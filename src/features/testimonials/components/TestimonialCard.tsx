@@ -1,9 +1,7 @@
 
 import React from 'react';
-import { Check, Clock } from 'lucide-react';
+import { Check, Star } from 'lucide-react';
 import { Testimonial } from '../config/widget-config';
-import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
 
 interface TestimonialCardProps {
   testimonial: Testimonial;
@@ -28,6 +26,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
         <div className="flex items-center">
           <div className="flex items-center gap-1 text-amber-400">
             <span className="text-lg font-semibold">{testimonial.rating}</span>
+            <Star className="w-5 h-5 fill-current" />
             <span className="text-sm text-gray-500">({testimonial.ratingCount})</span>
           </div>
         </div>
@@ -37,10 +36,9 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
       <p className="text-sm text-gray-500 mt-1">MEMBER SINCE {testimonial.memberSince}</p>
 
       <div className="flex flex-wrap gap-2 mt-4">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Clock className="w-4 h-4" />
-          <span>{testimonial.employmentType}</span>
-        </div>
+        <span className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600">
+          {testimonial.employmentType}
+        </span>
       </div>
 
       <div className="mt-4 text-sm text-gray-600">
@@ -52,11 +50,6 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
       <div className="flex items-center justify-between mt-6 pt-4 border-t">
         <span className="text-2xl font-bold text-emerald-600">${testimonial.hourlyRate}/hr</span>
-        <button className="text-gray-500 hover:text-gray-700">
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
-        </button>
       </div>
     </div>
   );
